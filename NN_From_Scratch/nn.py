@@ -1,6 +1,8 @@
 import math
 import numpy as np
 
+# Defining basic classes and functions.
+
 class Connection:
     def __init__(self,connectedNeuron):
         self.connectedNeuron = connectedNeuron

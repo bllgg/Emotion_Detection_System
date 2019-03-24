@@ -5,7 +5,7 @@ start_time = datetime.datetime.now()
 
 topology = []
 topology.append(3)
-topology.append(5)
+topology.append(3)
 topology.append(2)
 net = nn.Network(topology)
 nn.Neuron.eta = 0.5
