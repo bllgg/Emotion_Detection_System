@@ -80,7 +80,7 @@ if train_on_gpu:
     modelA.cuda()
 print(modelA)
 
-class ServoDrive(object):
+class DataObj(object):
     
     def __init__(self):self.out = [[0,0,0,0,0,0]]
     # simulate values
@@ -94,18 +94,18 @@ class ServoDrive(object):
 
     def set(self,output):self.out = output
 
-servo = ServoDrive()
+servo = DataObj()
 
 class Example(tk.Frame):
     def __init__(self, *args, **kwargs):
         tk.Frame.__init__(self, *args, **kwargs)
-        #self.servo = ServoDrive("TestMsg")
+        
         self.canvas = tk.Canvas(self, width=500, height= 150, background="black")
         self.canvas1 = tk.Canvas(self, width=250, height= 150, background="black")
         self.canvas1.pack(side="left", fill="both", expand=True)
         self.canvas.pack(side="right", fill="both", expand=True)
 
-        # create lines for velocity and torque
+        # create lines for Emotions
         self.Anger_line = self.canvas.create_line(0,25,0,25, fill="red")
         self.canvas1.create_text(50, 12, fill = 'white', text="Anger")
         self.Disgust_line = self.canvas.create_line(0,50,0,50, fill="blue")
@@ -144,12 +144,12 @@ class Example(tk.Frame):
         self.add_point(self.Surprise_line, 125 - (servo.getSurpricse() * 25.0))
         self.add_point(self.Sadness_line, 150 - (servo.getSadness() * 25.0))
 
-        self.update_textfiel(self.anger,an)
-        self.update_textfiel(self.disgust,di)
-        self.update_textfiel(self.happiness,ha)
-        self.update_textfiel(self.neutral,ne)
-        self.update_textfiel(self.surprice,su)
-        self.update_textfiel(self.sadness,sa)
+        self.update_textfiel(self.anger,round(an*100,3))
+        self.update_textfiel(self.disgust,round(di*100,3))
+        self.update_textfiel(self.happiness,round(ha*100,3))
+        self.update_textfiel(self.neutral,round(ne*100,3))
+        self.update_textfiel(self.surprice,round(su*100,3))
+        self.update_textfiel(self.sadness,round(sa*100,3))
 
         self.canvas.xview_moveto(1.0)
         self.after(100, self.update_plot)
